@@ -4,7 +4,7 @@ import listEndpoints from "list-endpoints-express";
 import { badRequest, unauthorizedHandler, notFoundHandler, genericHandler } from "./errorHandler.js";
 import cors from "cors";
 import createHttpError from "http-errors";
-//import filesRouter from "./api/files/index.js";
+import filesRouter from "./api/files/files.js";
 
 const server = express();
 const port = process.env.PORT;
@@ -28,7 +28,7 @@ server.use(
 server.use(express.json());
 
 server.use("/medias", mediaRouter);
-// server.use("/medias", filesRsouter);
+server.use("/media", filesRouter);
 
 server.use(badRequest);
 server.use(unauthorizedHandler);

@@ -21,7 +21,6 @@ mediaRouter.post("/", checkMediaSchema, detectBadRequest, async (req, res, next)
 mediaRouter.get("/", async (req, res, next) => {
   try {
     const medias = await getMedias();
-
     res.status(200).send(medias);
   } catch (error) {
     next(error);
@@ -32,7 +31,7 @@ mediaRouter.get("/:id", async (req, res, next) => {
   try {
     const medias = await getMedias();
     const id = req.params.id;
-    const foundMedia = medias.find((media) => media.id === id);
+    const foundMedia = medias.find((media) => media.imdbID === id);
 
     res.status(200).send(foundMedia);
   } catch (error) {
@@ -59,7 +58,7 @@ mediaRouter.delete("/:id", async (req, res, next) => {
   try {
     const medias = await getMedias();
     const id = req.params.id;
-    const remainingmedias = medias.filter((medias) => medias.id !== id);
+    const remainingmedias = medias.filter((medias) => medias.imdbID !== id);
     writeMedias(remainingmedias);
     res.status(200).send(remainingmedias);
   } catch (error) {
